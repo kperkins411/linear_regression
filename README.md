@@ -6,5 +6,5 @@ Maximum converging learning rate calculated using techniques annotated in:
 The function find_learning_rate(...)automatically calculates, plots, and returns the best learning rate.  Here is a sample plot
 ![My image](https://github.com/kperkins411/linear_regression/blob/master/art/lr_finder.png)
 
-Once the learning rate is determined.  The function main(...) runs a linear regressor on a synthetic dataset and dynamicly plots the ongoing results.  A sample screenshot
+Once the learning rate is determined.  The function main(...) runs a linear regressor on a synthetic dataset and dynamicly plots the ongoing results.  A sample screenshot<br>
 ![My image](https://github.com/kperkins411/linear_regression/blob/master/art/regression.png)
