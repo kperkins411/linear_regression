@@ -1,0 +1,10 @@
+'''
+constants for regression projects
+'''
+NUMB_SAMPLES = 100
+RAND_MAX_VAL =10
+RAND_MIN_VAL =0
+MAX_RISE = 20
+NUM_EPOCHS =1000
+
+INITIAL_WEIGHTS= [.5,0]
