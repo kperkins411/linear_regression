@@ -8,3 +8,9 @@ MAX_RISE = 20
 NUM_EPOCHS =1000
 
 INITIAL_WEIGHTS= [.5,0]
+
+#for learning rate finder
+LR_EPOCHS = 100
+MAX_LR = .001
+MIN_LR = .000001
+FEW_TEST_CYCLES=4   #sum the errors for this many cycles to see if they diverge

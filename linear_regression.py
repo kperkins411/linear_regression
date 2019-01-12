@@ -74,13 +74,8 @@ def main(x,y,w1,w2,lr):
     plt.ioff()
     plt.show()
 
-
-LR_EPOCHS = 100
-MAX_LR = .001
-MIN_LR = .000001
-FEW_TEST_CYCLES=4   #sum the errors for this many cycles to see if they diverge
-def find_learning_rate(x,y,w1_init,w2_init,lr_epochs = LR_EPOCHS,max_lr=MAX_LR, min_lr=MIN_LR,
-                       test_cycles=FEW_TEST_CYCLES):
+def find_learning_rate(x,y,w1_init,w2_init,lr_epochs = constants.LR_EPOCHS,max_lr=constants.MAX_LR,
+                       min_lr=constants.MIN_LR, test_cycles=constants.FEW_TEST_CYCLES):
     '''
     creates a list of learning rates from min_lr to max_lr. Then checks each for LR_EPOCHS to calculate totalError
     the lr with the smallest total error is the one that will converge the fastest
@@ -98,13 +93,13 @@ def find_learning_rate(x,y,w1_init,w2_init,lr_epochs = LR_EPOCHS,max_lr=MAX_LR, 
     totalerrors=[]
     for lr in LR:
         w1, w2 = w1_init, w2_init  # create weights
-        tmp_errors=[]
+
+        #train for a few epochs to see what kind of error we get
+        #if converging, then last epoch should have lowest error for this lr
         for _ in range(test_cycles):
             w1, w2 = backprop(lr, w1, w2, x, y)
-            tmp_errors.append(utils.gettotalerror(x,y,w1,w2))
 
-        # totalerrors.append(min(tmp_errors))
-        totalerrors.append(tmp_errors[test_cycles-1])
+        totalerrors.append(utils.gettotalerror(x,y,w1,w2))
 
         print(f"w1={w1}  w2={w2} lr={lr} totalerror={utils.gettotalerror(x,y,w1,w2)}")
 
