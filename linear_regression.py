@@ -115,8 +115,8 @@ def find_learning_rate(x,y,w1_init,w2_init,lr_epochs = LR_EPOCHS,max_lr=MAX_LR, 
 
     #enable below to see plot
     plt.title("Learning rate finder ")
-    plt.xlabel("error")
-    plt.ylabel("learning rate")
+    plt.ylabel("error")
+    plt.xlabel("learning rate")
     plt.ylim(min(totalerrors)-30,min(totalerrors)+30)  #lowest learning rate sets highest error (to display)
     plt.xlim(min(LR), max(LR))
     plt.autoscale(False)
