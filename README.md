@@ -1,5 +1,5 @@
-# linear_regression
-Simple linear regression demo.  Automatically calculates maximum converging learning rate. Plots calculated learning rate.  Dynamically plots regression.<br>
+# linear and Logistic Regression demos
+Simple linear and logistic regression demos.  Automatically calculates maximum converging learning rate. Plots calculated learning rate.  Dynamically plots regression.<br>
 
 Maximum converging learning rate calculated using techniques annotated in:
 <a href="https://arxiv.org/abs/1506.01186"> 'Cyclical Learning Rates for Training Neural Networks' by Leslie Smith</a><br>

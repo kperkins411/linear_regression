@@ -4,10 +4,34 @@ import numpy as np
 from random import gauss
 import matplotlib.pyplot as plt
 
+def genClustereddData():
+    '''
+    generate dataset for logistic regression
+    :return: x,y dataset
+    '''
+
+    # Generate three random clusters of 2D data bbb
+    NSAMPLES = 30
+    NDIMS = 2
+    NCLUSTERS = 2
+
+    center_cluster_A = [1,1]
+    center_cluster_B = [1.5,1.5]
+
+    #define the clusters
+    A = np.random.randn(NSAMPLES, NDIMS) + center_cluster_A
+    B = np.random.randn(NSAMPLES, NDIMS) + center_cluster_B
+
+    x=np.vstack((A,B))
+    q= np.ones((1,len(x[:,0])))
+    x = np.hstack((x, q.T))
+    y = np.hstack((np.zeros(A.shape[0]), np.ones(B.shape[0])))
+    return (x, y)
+
 
 def gendata():
     '''
-    generate dataset
+    generate dataset for linear regression
     :return: x,y dataset
     '''
     x = [val for val in range(constants.NUMB_SAMPLES)]
@@ -25,15 +49,7 @@ def gen_weights(initial_val = 0.5,num_weights=2):
     #make this a little more random?
     return[initial_val for _ in range(num_weights)]
 
-def gettotalerror_vectorize(x,y,w):
-    '''
-    returns the total regressed error over the dataset x,y for the given params w1,w2
-    :param x:
-    :param y:
-    :param w
-    :return:
-    '''
-    return np.sum((1 / 2) * (y - w @ x) ** 2, axis=1) / len(x[0])
+
 
 def _setplotlimits(x,y):
     '''
@@ -69,7 +85,7 @@ def plotdata(x,y, w1, w2, lr, tot_error,epoch_numb):
 
     plt.pause(0.01)
 
-def find_learning_rate_vectorize(x,y,w_init,backprop_func, lr_epochs = constants.LR_EPOCHS,max_lr=constants.MAX_LR,
+def find_learning_rate_vectorize(x,y,w_init,backprop_func,get_error_func, lr_epochs = constants.LR_EPOCHS,max_lr=constants.MAX_LR,
                        min_lr=constants.MIN_LR, test_cycles=constants.FEW_TEST_CYCLES, plt_lrs = True):
     '''
     creates a list of learning rates from min_lr to max_lr. Then checks each for LR_EPOCHS to calculate totalError
@@ -78,6 +94,7 @@ def find_learning_rate_vectorize(x,y,w_init,backprop_func, lr_epochs = constants
     :param y: data,y
     :param w
     :param backprop_func function that calculates gradient for params
+    :param get_error_func function that calculates the error
     :param lr_epochs:
     :param max_lr:
     :param min_lr:
@@ -94,9 +111,9 @@ def find_learning_rate_vectorize(x,y,w_init,backprop_func, lr_epochs = constants
         for _ in range(test_cycles):
             w = backprop_func(lr, w, x, y)
 
-        err = gettotalerror_vectorize(x,y,w)
+        err = get_error_func(w,x,y)
         totalerrors.append(err)
-        print(f"w1={w[0,0]}  w2={w[0,1]} lr={lr} totalerror={err}")
+        # print(f"w1={w[0,0]}  w2={w[0,1]} lr={lr} totalerror={err}")
 
     #here is the smallest error
     smallest_index = totalerrors.index(min(totalerrors))
