@@ -87,7 +87,7 @@ if __name__=="__main__":
     x = np.vstack((x, np.ones((x.shape[0]), dtype=x.dtype)))
 
     # first find the largest learning rate that allows model convergence
-    best_lr = utils.find_learning_rate_vectorize(x, y, w, backprop_vectorize,gettotalerror_vectorize, plt_lrs=False)
+    best_lr = utils.find_learning_rate_vectorize(x, y, w, backprop_vectorize,gettotalerror_vectorize, plt_lrs=True)
 
     #run the regressor
     main_vectorize(x, y, w, lr=best_lr)
